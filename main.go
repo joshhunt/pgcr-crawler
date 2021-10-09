@@ -28,8 +28,10 @@ func requestPgcr(pgcrID int) (PGCRResponse, error) {
 	}
 
 	apiKey := os.Getenv("BUNGIE_API_KEY")
+	if apiKey == "" {
+		panic("BUNGIE_API_KEY environment variable not defined")
+	}
 
-	// data.destinysets.com api key
 	req.Header.Set("x-api-key", apiKey)
 
 	res, getErr := pgcrHTTPClient.Do(req)
